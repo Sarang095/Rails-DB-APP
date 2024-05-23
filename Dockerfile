@@ -2,15 +2,15 @@
 FROM ruby:3.2.3
 
 RUN apt-get update -qq && apt-get install -y nodejs npm postgresql-client git ruby-bundler libpq-dev
-RUN  git clone https://github.com/Sarang095/Rails-DB-APP.git
-
+RUN mkdir Rails-DB-APP/
 WORKDIR /Rails-DB-APP
+COPY . /Rails-DB-APP
+
 
 RUN npm install
 RUN npm install -g yarn
 RUN yarn install
 RUN bundle install
-RUN bundle exec rake assets:precompile
 
 EXPOSE 3000
 EXPOSE 3035
