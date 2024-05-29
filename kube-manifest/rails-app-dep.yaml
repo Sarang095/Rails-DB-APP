@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rails-app-dep
+  labels:
+    app: rails-app-dep
+spec:
+  selector:
+    matchLabels:
+      app: rails-app-dep
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: rails-app-dep
+    spec:
+      containers:
+        - name: rails-db-app-web
+          image: csag095/rails-db-app-web:latest
+          ports:
+            - name: rails-app-port
+              containerPort: 3000
