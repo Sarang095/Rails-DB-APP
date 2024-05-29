@@ -4,7 +4,7 @@ metadata:
   name: rails-app-svc
 spec:
   ports:
-    - port: 3010
+    - port: 3000
       targetPort: rails-app-port
       protocol: TCP
   selector:
