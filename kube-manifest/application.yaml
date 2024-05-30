@@ -7,11 +7,11 @@ spec:
   project: default
 
   source:
-    repoURL: https://gitlab.com/nanuchi/argocd-app-config.git
+    repoURL: https://github.com/Sarang095/Rails-DB-APP.git
     targetRevision: HEAD
-    path: dev
+    path: kube-manifest/
   destination:
-    server: https://kubernetes.default.svc
+    server: https://api.kops.docknettes.site
     namespace: myapp
 
   syncPolicy:
