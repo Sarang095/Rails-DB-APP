@@ -10,4 +10,5 @@ data:
     local   all             all                                     trust
     host    all             all             0.0.0.0/0               trust
     host    all             all             ::/0                    trust
-  DB_USERNAME: postgres  
+  DB_USERNAME: "postgres"
+    

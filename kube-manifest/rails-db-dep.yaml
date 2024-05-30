@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: postgres
-          image: csag095/rails-db-app-db
+          image: csag095/rails-db-app-db:v1
           ports:
             - name: postgres-port
               containerPort: 5432

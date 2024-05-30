@@ -16,7 +16,19 @@ spec:
     spec:
       containers:
         - name: rails-db-app-web
-          image: csag095/rails-db-app-web:latest
+          image: csag095/rails-db-app-web:v1
           ports:
             - name: rails-app-port
               containerPort: 3000
+          env:
+            - name: DB_USERNAME
+              valueFrom:
+                configMapKeyRef:
+                  name: postgres-config
+                  key: DB_USERNAME
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  A
+                  name: postgres-secret
+                  key: dbpassword
