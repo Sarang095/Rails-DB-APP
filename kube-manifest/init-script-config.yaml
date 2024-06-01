@@ -4,4 +4,4 @@ metadata:
   name: init-sql-configmap
 data:
   init.sql: |
-    ALTER USER postgres WITH PASSWORD admin@123;
+    ALTER USER postgres WITH PASSWORD "admin@123";
