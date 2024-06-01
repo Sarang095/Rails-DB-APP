@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: rails-db-app-web
-          image: csag095/rails-db-app-web:v1
+          image: csag095/rails-db-app-web:v3
           ports:
             - name: rails-app-port
               containerPort: 3000
