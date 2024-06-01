@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: postgres
-          image: csag095/rails-db-app-db:v2
+          image: postgres:14.12
           ports:
             - name: postgres-port
               containerPort: 5432
@@ -30,9 +30,11 @@ spec:
                   name: postgres-secret
                   key: dbpassword
           volumeMounts:
-          - name: postgres-config
-            mountPath: /etc/postgresql/
+          - name: init-sql-volume
+            mountPath: /docker-entrypoint-initdb.d/init.sql
+            subPath: init.sql
       volumes:
-        - name: postgres-config
+        - name: init-sql-volume
           configMap:
-            name: postgres-config
+            name: init-sql-configmap
+

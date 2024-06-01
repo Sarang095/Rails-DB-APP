@@ -11,7 +11,7 @@ spec:
     targetRevision: HEAD
     path: kube-manifest/
   destination:
-    server: https://api.kops.docknettes.site
+    server: https://kubernetes.default.svc
     namespace: myapp
 
   syncPolicy:

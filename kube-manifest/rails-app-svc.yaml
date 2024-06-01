@@ -9,4 +9,4 @@ spec:
       protocol: TCP
   selector:
     app: rails-app-dep
-  type: LoadBalancer
+  type: NodePort

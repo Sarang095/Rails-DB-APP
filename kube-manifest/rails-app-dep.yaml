@@ -22,10 +22,7 @@ spec:
               containerPort: 3000
           env:
             - name: DB_USERNAME
-              valueFrom:
-                configMapKeyRef:
-                  name: postgres-config
-                  key: DB_USERNAME
+              value: postgres
             - name: DB_PASSWORD
               valueFrom:
                 secretKeyRef:
