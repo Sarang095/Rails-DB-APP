@@ -23,9 +23,9 @@ spec:
               containerPort: 5432
           env:
             - name: POSTGRES_USER
-              value: postgres
+              value: "postgres"
             - name: POSTGRES_PASSWORD
-              value: admin@123
+              value: "admin@123"
           volumeMounts:
           - name: init-sql-volume
             mountPath: /docker-entrypoint-initdb.d/init.sql
