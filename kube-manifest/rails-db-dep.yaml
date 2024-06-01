@@ -25,10 +25,7 @@ spec:
             - name: POSTGRES_USER
               value: postgres
             - name: POSTGRES_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: postgres-secret
-                  key: dbpassword
+              value: admin@123
           volumeMounts:
           - name: init-sql-volume
             mountPath: /docker-entrypoint-initdb.d/init.sql
