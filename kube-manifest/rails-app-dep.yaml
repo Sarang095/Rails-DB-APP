@@ -26,6 +26,6 @@ spec:
             - name: DB_PASSWORD
               value: "admin@123"
           command:
-            - "/bin/bash"  # Specify the shell explicitly
+            - "/bin/bash"
             - "-c"
-            - "bin/rails db:migrate && bundle exec rails server -b 0.0.0.0"
+            - "/usr/bin/env -S ruby bin/rails db:migrate && bundle exec rails server -b 0.0.0.0"

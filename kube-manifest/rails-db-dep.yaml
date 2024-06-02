@@ -23,7 +23,6 @@ spec:
             - -c
             - |
               su -c 'psql -c "CREATE DATABASE \"open-flights_development\";"' - postgres
-              su -c 'psql -c "ALTER USER postgres WITH PASSWORD '\''${POSTGRES_PASSWORD}'\'';"' - postgres
           env:
             - name: POSTGRES_PASSWORD
               valueFrom:
