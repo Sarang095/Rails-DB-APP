@@ -5,4 +5,4 @@ metadata:
 data:
   init.sql: |
     CREATE DATABASE "open-flights_development";
-    ALTER USER postgres WITH PASSWORD '${POSTGRES_PASSWORD}';
+    ALTER ROLE postgres PASSWORD '${POSTGRES_PASSWORD}';
