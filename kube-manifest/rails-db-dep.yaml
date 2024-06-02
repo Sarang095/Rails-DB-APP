@@ -27,11 +27,23 @@ spec:
             - name: POSTGRES_PASSWORD
               value: "admin@123"
           volumeMounts:
-          - name: init-sql-volume
-            mountPath: /docker-entrypoint-initdb.d/init.sql
-            subPath: init.sql
+            - name: init-sql-volume
+              mountPath: /docker-entrypoint-initdb.d/init.sql
+              subPath: init.sql
+          command: ["postgres"]
+          args: ["-c", "host all all 0.0.0.0/0 trust"]
       volumes:
         - name: init-sql-volume
           configMap:
             name: init-sql-configmap
-
+  podManagementPolicy: Parallel
+  updateStrategy:
+    type: RollingUpdate
+  volumeClaimTemplates:
+    - metadata:
+        name: postgres-data
+      spec:
+        accessModes: [ "ReadWriteOnce" ]
+        resources:
+          requests:
+            storage: 1Gi

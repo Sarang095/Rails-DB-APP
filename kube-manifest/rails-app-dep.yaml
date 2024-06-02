@@ -5,10 +5,10 @@ metadata:
   labels:
     app: rails-app-dep
 spec:
+  replicas: 1
   selector:
     matchLabels:
       app: rails-app-dep
-  replicas: 1
   template:
     metadata:
       labels:
