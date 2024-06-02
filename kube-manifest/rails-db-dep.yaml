@@ -1,11 +1,10 @@
 apiVersion: apps/v1
-kind: StatefulSet
+kind: Deployment
 metadata:
   name: postgres
   labels:
     app: postgres
 spec:
-  serviceName: postgres
   replicas: 1
   selector:
     matchLabels:
@@ -26,21 +25,13 @@ spec:
               value: "postgres"
             - name: POSTGRES_PASSWORD
               value: "admin@123"
+          command: ["postgres"]
+          args: ["-c", "host all all 0.0.0.0/0 trust"]
           volumeMounts:
             - name: init-sql-volume
               mountPath: /docker-entrypoint-initdb.d/init.sql
               subPath: init.sql
-          command: ["postgres"]
-          args: ["-c", "host all all 0.0.0.0/0 trust"]
       volumes:
         - name: init-sql-volume
           configMap:
             name: init-sql-configmap
-  volumeClaimTemplates:
-    - metadata:
-        name: postgres-data
-      spec:
-        accessModes: [ "ReadWriteOnce" ]
-        resources:
-          requests:
-            storage: 1Gi
