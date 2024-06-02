@@ -41,24 +41,3 @@ spec:
         - name: postgres-data
           persistentVolumeClaim:
             claimName: postgres-pvc
----
-apiVersion: batch/v1
-kind: Job
-metadata:
-  name: postgres-init
-spec:
-  template:
-    spec:
-      containers:
-        - name: postgres-init
-          image: postgres:14.12
-          command: ["/bin/sh", "-c"]
-          args:
-            - >
-              until psql -h localhost -U postgres -c '\l'; do
-                echo "Waiting for PostgreSQL to start..."
-                sleep 1
-              done
-              psql -h localhost -U postgres -c "CREATE DATABASE \"open-flights_development\";"
-              psql -h localhost -U postgres -c "ALTER USER postgres WITH PASSWORD '${POSTGRES_PASSWORD}';"
-      restartPolicy: Never
