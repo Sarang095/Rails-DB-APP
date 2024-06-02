@@ -25,4 +25,7 @@ spec:
               value: "postgres"
             - name: DB_PASSWORD
               value: "admin@123"
-          command: ["sh", "-c", "bin/rails db:migrate && bundle exec rails server -b 0.0.0.0"]
+          command:
+            - "/bin/bash"  # Specify the shell explicitly
+            - "-c"
+            - "bin/rails db:migrate && bundle exec rails server -b 0.0.0.0"
