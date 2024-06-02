@@ -26,7 +26,10 @@ spec:
             - name: POSTGRES_PASSWORD
               value: "admin@123"
           command: ["postgres"]
-          args: ["-c", "host all all 0.0.0.0/0 trust"]
+          args: ["-c", "listen_addresses=*"]
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 999 # or the UID of the "postgres" user in the container
           volumeMounts:
             - name: init-sql-volume
               mountPath: /docker-entrypoint-initdb.d/init.sql
