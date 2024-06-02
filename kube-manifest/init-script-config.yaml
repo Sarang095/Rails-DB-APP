@@ -4,4 +4,5 @@ metadata:
   name: init-sql-configmap
 data:
   init.sql: |
+    CREATE DATABASE "open-flights_development";
     ALTER USER postgres WITH PASSWORD '${POSTGRES_PASSWORD}';
