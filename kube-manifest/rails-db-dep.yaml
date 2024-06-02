@@ -25,16 +25,12 @@ spec:
               value: "postgres"
             - name: POSTGRES_PASSWORD
               value: "admin@123"
-          command: ["postgres"]
-          args: ["-c", "listen_addresses=*"]
           securityContext:
-            runAsNonRoot: true
-            runAsUser: 999 # or the UID of the "postgres" user in the container
+            runAsUser: 999 # Set this to the UID of the 'postgres' user in the container
           volumeMounts:
-            - name: init-sql-volume
-              mountPath: /docker-entrypoint-initdb.d/init.sql
-              subPath: init.sql
+            - name: postgres-data
+              mountPath: /var/lib/postgresql/data
       volumes:
-        - name: init-sql-volume
-          configMap:
-            name: init-sql-configmap
+        - name: postgres-data
+          persistentVolumeClaim:
+            claimName: postgres-pvc # Ensure the correct PVC is used here
