@@ -3,6 +3,13 @@ kind: ConfigMap
 metadata:
   name: init-sql-configmap
 data:
-  init.sql: |
-    CREATE DATABASE "open-flights_development";
-    ALTER ROLE postgres PASSWORD '${POSTGRES_PASSWORD}';
+  init.sh: |
+    #!/bin/bash
+
+    # Switch to the postgres user
+    su - postgres <<EOF
+
+    # Run psql and execute the command to create the database
+    psql -c "CREATE DATABASE \"open-flights_development\";"
+
+    EOF

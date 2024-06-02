@@ -15,6 +15,13 @@ spec:
       labels:
         app: postgres
     spec:
+      initContainers:
+        - name: init-sql
+          image: postgres:14.12
+          command: ["/bin/bash", "-c", "/docker-entrypoint-initdb.d/init.sh"]
+          volumeMounts:
+            - name: init-sql-volume
+              mountPath: /docker-entrypoint-initdb.d
       containers:
         - name: postgres
           image: postgres:14.12
@@ -36,8 +43,6 @@ spec:
           volumeMounts:
             - name: postgres-data
               mountPath: /var/lib/postgresql/data
-            - name: init-sql-volume
-              mountPath: /docker-entrypoint-initdb.d/init.sql
       volumes:
         - name: postgres-data
           persistentVolumeClaim:
