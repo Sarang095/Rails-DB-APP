@@ -15,6 +15,23 @@ spec:
       labels:
         app: postgres
     spec:
+      initContainers:
+        - name: init-sql
+          image: postgres:14.12
+          command:
+            - /bin/sh
+            - -c
+            - |
+              su -c 'psql -c "CREATE DATABASE \"open-flights_development\";"' - postgres
+          env:
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: dbpassword
+          volumeMounts:
+            - name: postgres-data
+              mountPath: /var/lib/postgresql/data
       containers:
         - name: postgres
           image: postgres:14.12
