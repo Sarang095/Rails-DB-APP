@@ -43,6 +43,13 @@ spec:
               value: "256MB"
             - name: POSTGRES_MAX_CONNECTIONS
               value: "200"
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: dbpassword
+                  name: postgres-secret
+            - name: POSTGRES_HOST_AUTH_METHOD
+              value: trust
           volumeMounts:
             - name: postgres-data
               mountPath: /var/lib/postgresql/data
