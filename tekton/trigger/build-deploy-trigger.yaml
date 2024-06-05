@@ -40,7 +40,7 @@ kind: Trigger
 metadata:
   name: tekton-pipeline-trigger
 spec:
-  resourcetemplates:  # Fix the typo here
+  resourceTemplates:  # Corrected field name
     - apiVersion: v1
       kind: Service
       metadata:
@@ -57,7 +57,7 @@ spec:
       spec:
         port:
           targetPort: 8080
-  triggerbindingref:
+  triggerBindingRef:  # Corrected field name
     name: tekton-pipeline-trigger-binding
-  triggertemplateref:
+  triggerTemplateRef:  # Corrected field name
     name: tekton-pipeline-trigger-template
