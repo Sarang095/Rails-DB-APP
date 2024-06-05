@@ -1,0 +1,29 @@
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  generateName: clone-build-push-run-
+spec:
+  pipelineRef:
+    name: clone-build-push
+  podTemplate:
+    securityContext:
+      fsGroup: 65532
+  workspaces:
+    - name: shared-data
+      volumeClaimTemplate:
+        spec:
+          accessModes:
+            - ReadWriteOnce
+          resources:
+            requests:
+              storage: 1Gi
+    - name: dockerhub-secrets
+      secret:
+        secretName: dockerhub-secret
+  params:
+    - name: repo-url
+      value: https://github.com/Sarang095/Rails-DB-APP.git
+    - name: image-reference
+      value: csag095/rails-db-app-web:v7
+    - name: registry-url
+      value: https://hub.docker.com/repository/docker/csag095/rails-db-app-web/general

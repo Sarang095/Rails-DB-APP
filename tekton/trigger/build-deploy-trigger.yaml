@@ -1,0 +1,63 @@
+apiVersion: triggers.tekton.dev/v1alpha1
+kind: TriggerTemplate
+metadata:
+  name: tekton-pipeline-trigger-template
+spec:
+  params:
+    - name: gitrevision
+      description: "Git revision"
+    - name: image
+      description: "Docker image name"
+  resourcetemplates:
+    - apiVersion: tekton.dev/v1beta1
+      kind: PipelineRun
+      metadata:
+        generateName: tekton-pipeline-run-
+      spec:
+        pipelineRef:
+          name: clone-build-push
+        params:
+          - name: gitrevision
+            value: $(tt.params.gitrevision)
+          - name: image
+            value: $(tt.params.image)
+
+---
+apiVersion: triggers.tekton.dev/v1alpha1
+kind: TriggerBinding
+metadata:
+  name: tekton-pipeline-trigger-binding
+spec:
+  params:
+    - name: gitrevision
+      value: $(body.head_commit.id)
+    - name: image
+      value: "csag095/rails-db-app-web:v7"
+
+---
+apiVersion: triggers.tekton.dev/v1alpha1
+kind: Trigger
+metadata:
+  name: tekton-pipeline-trigger
+spec:
+  resourcetemplates:
+    - apiVersion: v1
+      kind: Service
+      metadata:
+        name: tekton-pipeline-trigger-service
+      spec:
+        ports:
+          - port: 8080
+            targetPort: 8080
+            name: http
+    - apiVersion: v1
+      kind: Route
+      metadata:
+        name: tekton-pipeline-trigger-route
+      spec:
+        port:
+          targetPort: 8080
+  triggerbindingref:
+    name: tekton-pipeline-trigger-binding
+  triggertemplateref:
+    name: tekton-pipeline-trigger-template
