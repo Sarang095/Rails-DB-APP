@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: myapp-argo-application-tekton
-  namespace: argocd
+  namespace: tekton-pipelines
 spec:
   project: default
 
