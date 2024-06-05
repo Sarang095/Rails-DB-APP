@@ -8,7 +8,7 @@ spec:
       description: "Git revision"
     - name: image
       description: "Docker image name"
-  resourcetemplates:
+  resourceTemplates:  # Corrected field name
     - apiVersion: tekton.dev/v1beta1
       kind: PipelineRun
       metadata:
@@ -40,7 +40,7 @@ kind: Trigger
 metadata:
   name: tekton-pipeline-trigger
 spec:
-  resourcetemplates:
+  resourcetemplates:  # Fix the typo here
     - apiVersion: v1
       kind: Service
       metadata:
