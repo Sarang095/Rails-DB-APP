@@ -16,7 +16,7 @@ spec:
   workspaces:
     - name: shared-data
     - name: dockerhub-secret
-      tasks:
+  tasks:  # Add the 'tasks' field here
     - name: fetch-source
       taskRef:
         name: git-clone
