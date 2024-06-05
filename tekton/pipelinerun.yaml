@@ -5,6 +5,7 @@ metadata:
 spec:
   pipelineRef:
     name: clone-build-push
+  serviceAccountName: tekton-serviceaccount  # Add this line
   podTemplate:
     securityContext:
       fsGroup: 65532
@@ -17,7 +18,7 @@ spec:
           resources:
             requests:
               storage: 1Gi
-    - name: dockerhub-secrets
+    - name: dockerhub-secret
       secret:
         secretName: dockerhub-secret
   params:

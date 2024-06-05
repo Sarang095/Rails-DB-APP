@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: build-task-configmap
+data:
+  DOCKER_NAMESPACE: "csag095"
+  DOCKER_IMAGE_NAME: "rails-db-app-web"
+  DOCKER_TAG: "v7"

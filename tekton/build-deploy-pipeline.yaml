@@ -3,8 +3,9 @@ kind: Pipeline
 metadata:
   name: clone-build-push
 spec:
+  serviceAccountName: tekton-serviceaccount  # Add this line
   description: |
-    This pipeline clones a git repo, builds a Docker image with Kaniko and
+    This pipeline clones a git repo, builds a Docker image with Kaniko, and
     pushes it to a registry
   params:
     - name: repo-url
@@ -16,7 +17,7 @@ spec:
   workspaces:
     - name: shared-data
     - name: dockerhub-secret
-  tasks:  # Add the 'tasks' field here
+  tasks:
     - name: fetch-source
       taskRef:
         name: git-clone
@@ -29,14 +30,20 @@ spec:
     - name: build-push
       runAfter: ["fetch-source"]
       taskRef:
-        name: kaniko
+        name: build-docker-image
       workspaces:
-        - name: source
+        - name: git-app-repo
           workspace: shared-data
-        - name: dockerconfig
-          workspace: dockerhub-secret
       params:
-        - name: IMAGE
-          value: $(params.image-reference)
+        - name: pathToDockerFile
+          value: Dockerfile
+        - name: pathToContext
+          value: /workspace/git-app-repo
+        - name: DOCKER_NAMESPACE
+          value: csag095
+        - name: DOCKER_IMAGE_NAME
+          value: rails-db-app-web
+        - name: DOCKER_TAG
+          value: v7
         - name: DOCKER_REGISTRY
           value: $(params.registry-url)
