@@ -7,15 +7,13 @@ spec:
   project: default
 
   source:
-    repoURL: https://github.com/Sarang095/Rails-DB-APP.git
+    repoURL: https://github.com/Sarang095/Tekton.git
     targetRevision: HEAD
-    path: tekton/
+    path: Tekton/
   destination:
     server: https://kubernetes.default.svc
 
   syncPolicy:
-    syncOptions:
-      - CreateNamespace=true
 
     automated:
       selfHeal: true
