@@ -3,6 +3,7 @@ FROM ruby:3.2.3
 
 RUN apt-get update -qq && apt-get install -y nodejs npm postgresql-client git ruby-bundler libpq-dev
 RUN mkdir Rails-DB-APP/
+RUN mkdir test/
 WORKDIR /Rails-DB-APP
 COPY . /Rails-DB-APP
 
