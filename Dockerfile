@@ -1,7 +1,7 @@
 # Use an official Ruby runtime as a parent image
 FROM ruby:3.2.3
 
-RUN apt-get update -qq && apt-get install -y nodejs npm postgresql-client git ruby-bundler libpq-dev
+RUN apt-get update -qq && apt-get install -y nodejs npm postgresql-client ruby-bundler libpq-dev
 RUN mkdir Rails-DB-APP/
 RUN mkdir test/
 WORKDIR /Rails-DB-APP
@@ -9,8 +9,6 @@ COPY . /Rails-DB-APP
 
 
 RUN npm install
-RUN npm install -g yarn
-RUN yarn install
 RUN bundle install
 
 EXPOSE 3000
