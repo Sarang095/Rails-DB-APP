@@ -8,6 +8,8 @@ COPY . /Rails-DB-APP
 
 
 RUN npm install
+RUN npm install -g yarn
+RUN yarn install
 RUN bundle install
 
 EXPOSE 3000
